@@ -25,6 +25,7 @@ python server.py
 what's being collected:
 ======================
 
+```json
 {
     "history_result": {
         "typedCount": 332,
@@ -63,4 +64,4 @@ what's being collected:
     },
     "id": "evil.legacy@gmail.com"
 }
-
+```
