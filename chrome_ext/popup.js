@@ -26,7 +26,7 @@ function renderMissions()
         if (mission == getCurrentMission())
             m.addClass("selected");
 
-        var remove_mission = $("<span></span>").addClass("ui-icon ui-icon-plus").css({"float": "right", "display": "inline-block"})
+        var remove_mission = $("<span></span>").addClass("ui-icon ui-icon-circle-close").css({"float": "right", "display": "inline-block"})
 
         remove_mission.click(function()
         {
@@ -41,7 +41,7 @@ function renderMissions()
 
     $("#missions .ui-widget-content").click(function() {
       $(this).addClass("selected").siblings().removeClass("selected");
-      setMission($($(this).children()[0]).html());
+      setCurrentMission($($(this).children()[0]).html());
     });
 }
 
@@ -49,11 +49,6 @@ function toggleExtentsion()
 {
     localStorage["enabled"] = isEnabled() ? 0 : 1;
     renderView();
-}
-
-function getCurrentMission()
-{
-    return localStorage["mission"];
 }
 
 function getMissions()
@@ -75,9 +70,14 @@ function addMission(mission)
     localStorage["missions"] = JSON.stringify(missions);
 }
 
-function setMission(mission)
+function setCurrentMission(mission)
 {
     localStorage["mission"] = mission;
+}
+
+function resetCurrentMission()
+{
+    delete localStorage["mission"];
 }
 
 function removeMission(mission)
@@ -90,6 +90,9 @@ function removeMission(mission)
     })
 
     setMissions(missions);
+
+    if (mission == getCurrentMission())
+        resetCurrentMission();
 
     renderView();
 }
@@ -106,6 +109,7 @@ function newMission(e)
 
     if (isNewMission(mission)) {
         addMission(mission);
+        setCurrentMission(mission);
     }
     renderView();
 }

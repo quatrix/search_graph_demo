@@ -11,3 +11,8 @@ function setIcon()
         chrome.browserAction.setIcon({path: "online-icon.png"});
 }
 
+function getCurrentMission()
+{
+    return localStorage["mission"];
+}
+

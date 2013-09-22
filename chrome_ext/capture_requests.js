@@ -49,10 +49,13 @@ function got_email_address(res)
                         tab: tab,
                         history_result: history_results[0],
                         visit: visit,
-                        id: email_address
+                        id: email_address,
+                        mission: getCurrentMission()
                     }
 
-                    send_to_server(data)
+                    if (isEnabled() && getCurrentMission()) {
+                        send_to_server(data);
+                    }
                 });
             }
         })
