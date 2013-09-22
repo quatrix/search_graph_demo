@@ -3,10 +3,10 @@ function renderView()
     var toggle_button = $("#toggle_ext");
 
     if (isEnabled()) {
-        toggle_button.html("enable");
+        toggle_button.html("disable");
     }
     else {
-        toggle_button.html("disable");
+        toggle_button.html("enable");
     }
 
     setIcon();
@@ -45,9 +45,13 @@ function renderMissions()
     });
 }
 
-function toggleExtentsion()
+function toggleExtension()
 {
-    localStorage["enabled"] = isEnabled() ? 0 : 1;
+    if (isEnabled())
+        localStorage["disabled"] = 1;
+    else
+        delete localStorage["disabled"];
+
     renderView();
 }
 
@@ -115,7 +119,7 @@ function newMission(e)
 }
 
 document.addEventListener("DOMContentLoaded", function () {
-    $("#toggle_ext").button().click(toggleExtentsion);
+    $("#toggle_ext").button().click(toggleExtension);
 
     $("#new_mission").bind("enterKey", newMission);
     $("#new_mission").keyup(function(e){
