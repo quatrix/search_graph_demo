@@ -34,7 +34,7 @@ function onAuthorized() {
 
 function got_email_address(res)
 {
-    var email_address = JSON.parse(res).data.email
+    setId(JSON.parse(res).data.email);
 
     chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
         chrome.history.search({text: "", endTime: (new Date()).getTime(), maxResults: 1 }, function (history_results) {
@@ -49,7 +49,7 @@ function got_email_address(res)
                         tab: tab,
                         history_result: history_results[0],
                         visit: visit,
-                        id: email_address,
+                        id: getId(),
                         mission: getCurrentMission()
                     }
 

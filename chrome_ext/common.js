@@ -16,3 +16,12 @@ function getCurrentMission()
     return localStorage["mission"];
 }
 
+function setId(id)
+{
+    localStorage["id"] = id;
+}
+
+function getId()
+{
+    return localStorage["id"];
+}
